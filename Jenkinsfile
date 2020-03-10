@@ -1,25 +1,30 @@
 pipeline {
-  agent {
-    dockerfile {
-      filename 'Dockerfile'
-      args "-t 558860702682.dkr.ecr.eu-central-1.amazonaws.com/hello-world:1.0"
-    }
+  
+  
+  agent any
 
+
+  environment {
+    registry = "558860702682.dkr.ecr.eu-central-1.amazonaws.com/hello-world"
+    dockerImage = ''
   }
-  stages {
-    stage('') {
-      steps {
-        echo 'hi'
+
+  stage('Building image') {
+      steps{
+        script {
+          dockerImage = docker.build registry + ":$BUILD_NUMBER"
+        }
       }
     }
     
     stage('Push image') {
          steps {
            withDockerRegistry([url: "https://558860702682.dkr.ecr.eu-central-1.amazonaws.com/hello-world",credentialsId: "ecr:eu-central-1:ecr"]) {
-           sh 'docker push 558860702682.dkr.ecr.eu-central-1.amazonaws.com/hello-world:1.0'
+               dockerImage.push()
                }
+            }
         }
+    }
 
-  }
-}
+
 }
