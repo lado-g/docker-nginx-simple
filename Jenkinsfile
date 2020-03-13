@@ -5,6 +5,7 @@ pipeline {
 
 
   environment {
+    DATE  = sh(script: "echo `date +%s`", returnStdout: true).trim()
     registry = "558860702682.dkr.ecr.eu-central-1.amazonaws.com/hello-world"
     dockerImage = ''
     registryurl=  "https://558860702682.dkr.ecr.eu-central-1.amazonaws.com/hello-world"
@@ -35,7 +36,7 @@ pipeline {
                  withDockerRegistry([url: registryurl ,credentialsId: "ecr:eu-central-1:ecr"]) {
                      dockerImage.push(env.GIT_COMMIT)
                      dockerImage.push("latest")
-                     dockerImage.push(env.BUILD_ID)
+                     dockerImage.push(env.DATE)
                      
                     }
                 }
