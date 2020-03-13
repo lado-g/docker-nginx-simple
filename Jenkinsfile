@@ -5,7 +5,7 @@ pipeline {
 
 
   environment {
-    DATE  = sh(script: "echo `date +%s`", returnStdout: true).trim()
+    DATE  = sh(script: "echo (date +%F-%T)")
     registry = "558860702682.dkr.ecr.eu-central-1.amazonaws.com/hello-world"
     dockerImage = ''
     registryurl=  "https://558860702682.dkr.ecr.eu-central-1.amazonaws.com/hello-world"
