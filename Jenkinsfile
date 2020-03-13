@@ -24,7 +24,7 @@ pipeline {
         stage('Building image') {
             steps{
               script {
-                dockerImage = docker.build registry + ":$GIT_COMMIT"
+                dockerImage = docker.build registry
               }
             }
           }
@@ -33,7 +33,9 @@ pipeline {
                steps {
                    script {
                  withDockerRegistry([url: registryurl ,credentialsId: "ecr:eu-central-1:ecr"]) {
-                     dockerImage.push()
+                     dockerImage.push(env.GIT_COMMIT)
+                     dockerImage.push("latest")
+                     dockerImage.push(env.BUILD_ID)
                      
                     }
                 }
