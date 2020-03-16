@@ -32,7 +32,7 @@ pipeline {
         stage ('unit tests') {
             steps {
                 script {
-                    sh 'sudo pip install pytest'
+                    sh 'sudo pip install --user pytest'
                     sh 'python -m pytest --verbose --junit-xml test-reports/results.xml test_file.py'
                 }
             }
