@@ -38,8 +38,8 @@ pipeline {
                      '''
               }
             }
-        }
-        post {
+        
+            post {
                 always {
                     // Archive unit tests for the future
                     junit (allowEmptyResults: true,
@@ -47,6 +47,7 @@ pipeline {
                           fingerprint: true)
                 }
             }
+        }
 
        //   stage('Push image') {
        //        steps {
