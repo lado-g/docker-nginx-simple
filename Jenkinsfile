@@ -1,7 +1,7 @@
 pipeline {
   
   
-  agent any
+  agent { docker { image 'python3-with-pytest' } }
 
 
   environment {
@@ -32,11 +32,7 @@ pipeline {
         stage ('unit tests') {
             steps {
               script {
-                     sh ''' 
-                     #!/bin/bash
-                     python -m venv env
-                     source ./env/bin/activate
-                     pip install  pytest
+                     sh '''
                      python -m pytest --verbose --junit-xml test-reports/results.xml test_file.py
                      '''
               }
