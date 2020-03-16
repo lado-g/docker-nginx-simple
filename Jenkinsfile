@@ -22,14 +22,7 @@ pipeline {
             git branch: "${params.BRANCH}", url: githuburl
           }
         }  
-        post {
-                always {
-                    // Archive unit tests for the future
-                    junit (allowEmptyResults: true,
-                          testResults: './test-reports/results.xml',
-                          fingerprint: true)
-                }
-            }
+        
         //stage('Building image') {
         //    steps{
         //      script {
@@ -45,7 +38,15 @@ pipeline {
                      '''
               }
             }
-        }  
+        }
+        post {
+                always {
+                    // Archive unit tests for the future
+                    junit (allowEmptyResults: true,
+                          testResults: './test-reports/results.xml',
+                          fingerprint: true)
+                }
+            }
 
        //   stage('Push image') {
        //        steps {
