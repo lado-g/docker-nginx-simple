@@ -31,12 +31,13 @@ pipeline {
         //  }
         stage ('unit tests') {
             steps {
-                
-                    bash 'python -m venv env'
-                    bash 'source ./env/bin/activate'
-                    bash 'pip install  pytest'
-                    bash 'python -m pytest --verbose --junit-xml test-reports/results.xml test_file.py'
-                
+              script {
+                     sh ''' #!/bin/bash
+                     python -m venv env
+                     source ./env/bin/activate
+                     pip install  pytest
+                     python -m pytest --verbose --junit-xml test-reports/results.xml test_file.py
+              }
             }
         }  
 
