@@ -32,7 +32,8 @@ pipeline {
         stage ('unit tests') {
             steps {
               script {
-                     sh ''' #!/bin/bash
+                     sh ''' 
+                     #!/bin/bash
                      python -m venv env
                      source ./env/bin/activate
                      pip install  pytest
