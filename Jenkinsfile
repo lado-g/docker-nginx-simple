@@ -42,7 +42,7 @@ pipeline {
             post {
                 always {
                     // Archive unit tests for the future
-                    junit '**/build/test-reports/*.xml'
+                    junit '/test-reports/*.xml'
                         
                 }
             }
