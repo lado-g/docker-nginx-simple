@@ -32,7 +32,9 @@ pipeline {
         stage ('unit tests') {
             steps {
                 script {
-                    sh 'pip install --user pytest'
+                    sh 'python -m venv env'
+                    sh 'source ./env/bin/activate'
+                    sh 'pip install  pytest'
                     sh 'python -m pytest --verbose --junit-xml test-reports/results.xml test_file.py'
                 }
             }
