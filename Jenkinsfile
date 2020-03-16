@@ -29,6 +29,13 @@ pipeline {
               }
             }
           }
+        stage ('unit tests') {
+            steps {
+                script {
+                    python -m unittest
+                }
+            }
+        }  
 
           stage('Push image') {
                steps {
@@ -41,7 +48,9 @@ pipeline {
                     }
                 }
             }
-        }  
+        }
+
+            
     }
 
 }
