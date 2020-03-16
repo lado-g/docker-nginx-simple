@@ -32,7 +32,7 @@ pipeline {
         stage ('unit tests') {
             steps {
                 script {
-                    sh 'pytest --junitxml results.xml  test_filepy'
+                    sh 'python -m pytest --verbose --junit-xml test-reports/results.xml test_file.py'
                 }
             }
         }  
