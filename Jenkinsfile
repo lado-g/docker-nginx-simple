@@ -32,7 +32,7 @@ pipeline {
         stage ('unit tests') {
             steps {
                 script {
-                    sh 'python -m unittest ./test-unit-test.py'
+                    sh 'python -m unittest ./test_file'
                 }
             }
         }  
