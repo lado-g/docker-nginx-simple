@@ -22,13 +22,13 @@ pipeline {
             git branch: "${params.BRANCH}", url: githuburl
           }
         }  
-        stage('Building image') {
-            steps{
-              script {
-                dockerImage = docker.build registry
-              }
-            }
-          }
+        //stage('Building image') {
+        //    steps{
+        //      script {
+        //        dockerImage = docker.build registry
+        //      }
+        //    }
+        //  }
         stage ('unit tests') {
             steps {
                 script {
@@ -37,18 +37,18 @@ pipeline {
             }
         }  
 
-          stage('Push image') {
-               steps {
-                   script {
-                 withDockerRegistry([url: registryurl ,credentialsId: "ecr:eu-central-1:ecr"]) {
-                     dockerImage.push(env.GIT_COMMIT)
-                     dockerImage.push("latest")
-                     dockerImage.push(env.DATE)
-                     
-                    }
-                }
-            }
-        }
+       //   stage('Push image') {
+       //        steps {
+       //            script {
+       //          withDockerRegistry([url: registryurl ,credentialsId: "ecr:eu-central-1:ecr"]) {
+       //              dockerImage.push(env.GIT_COMMIT)
+       //              dockerImage.push("latest")
+       //              dockerImage.push(env.DATE)
+       //              
+       //             }
+       //         }
+       //     }
+       // }
 
             
     }
