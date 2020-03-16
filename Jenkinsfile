@@ -37,6 +37,7 @@ pipeline {
                      source ./env/bin/activate
                      pip install  pytest
                      python -m pytest --verbose --junit-xml test-reports/results.xml test_file.py
+                     '''
               }
             }
         }  
