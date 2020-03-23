@@ -1,7 +1,7 @@
 pipeline {
   
   
-  agent { docker { image 'python3-with-pytest' } }
+  agent { docker { image 'bitnami/kubectl' } }
 
 
   environment {
@@ -36,24 +36,24 @@ pipeline {
         //      }
         //    }
         //  }
-        stage ('unit tests') {
-            steps {
-              script {
-                     sh '''
-                     python -m pytest --verbose --junit-xml test-reports/results.xml test_file.py
-                     '''
-              }
-            }
-        
-            post {
-                always {
-                    // Archive unit tests for the future
-                    junit 'test-reports/*.xml'
-                        
-                }
-            }
-        }
-
+        //stage ('unit tests') {
+//            steps {
+//              script {
+//                     sh '''
+//                     python -m pytest --verbose --junit-xml test-reports/results.xml test_file.py
+//                     '''
+//              }
+//            }
+//        
+//            post {
+//                always {
+//                    // Archive unit tests for the future
+//                    junit 'test-reports/*.xml'
+//                        
+//                }
+//            }
+//        }
+//
        //   stage('Push image') {
        //        steps {
        //            script {
