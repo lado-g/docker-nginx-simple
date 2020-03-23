@@ -1,7 +1,7 @@
 pipeline {
   
   
-  agent { docker { image 'bitnami/kubectl' } }
+  agent { docker { image 'roffe/kubectl' } }
 
 
   environment {
