@@ -1,7 +1,11 @@
 pipeline {
   
   
-  agent { docker { image 'kubectl-with-aws-cli:1.0.3' } }
+  agent { docker { 
+    image 'kubectl-with-aws-cli:1.0.3'
+    args  '-v /var/run/docker.sock:/var/run/docker.sock'
+    }
+  }
 
 
   environment {
