@@ -24,7 +24,7 @@ pipeline {
         }  
         stage ('k8s') {
           steps {
-            withKubeConfig(clusterName: 'eks-test', contextName: 'test', credentialsId: 'ecr:eu-central-1:ecr', namespace: 'test', serverUrl: 'https://B2EF2EDE4C3C11211A74ADFE80BA95C8.gr7.eu-central-1.eks.amazonaws.com') {
+            withKubeConfig(clusterName: 'eks', contextName: '', credentialsId: 'eks', namespace: 'kube-system', serverUrl: 'https://B2EF2EDE4C3C11211A74ADFE80BA95C8.gr7.eu-central-1.eks.amazonaws.com') {
               sh 'kubectl get pods'
               }
           }
