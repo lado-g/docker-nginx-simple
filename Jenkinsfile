@@ -72,7 +72,7 @@ pipeline {
           steps {
             withKubeConfig(clusterName: 'eks', contextName: '', credentialsId: 'eks', namespace: 'kube-system', serverUrl: 'https://F56D93F0BD9D9EFC60E3B17D008C1C51.gr7.eu-central-1.eks.amazonaws.com') {
               withAWS(credentials: 'lado', region: 'eu-central-1'){
-                    sh 'kubectl set image  deployment.apps/hello-world 558860702682.dkr.ecr.eu-central-1.amazonaws.com/hello-world:latest' 
+                    sh 'kubectl set image  deployment.apps/hello-world hello-world=558860702682.dkr.ecr.eu-central-1.amazonaws.com/hello-world:latest' 
                 }
               }
             }
