@@ -26,9 +26,6 @@ pipeline {
           steps {
             withKubeConfig(clusterName: 'eks', contextName: '', credentialsId: 'eks', namespace: 'kube-system', serverUrl: 'https://B2EF2EDE4C3C11211A74ADFE80BA95C8.gr7.eu-central-1.eks.amazonaws.com') {
               withAWS(credentials: 'lado', region: 'eu-central-1'){
-                    sh 'curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"'
-                    sh 'unzip awscliv2.zip -y'
-                    sh './aws/install '
                     sh 'kubectl get pods' 
                 }
               }
