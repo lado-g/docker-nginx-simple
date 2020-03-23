@@ -21,12 +21,12 @@ pipeline {
   
   stages {
         
-        stage('Example') {
+        stage('Git Branch') {
           steps {
             git branch: "${params.BRANCH}", url: githuburl
           }
         }  
-        stage ('k8s-ls') {
+        stage ('k8s-pods') {
           steps {
             withKubeConfig(clusterName: 'eks', contextName: '', credentialsId: 'eks', namespace: 'kube-system', serverUrl: 'https://F56D93F0BD9D9EFC60E3B17D008C1C51.gr7.eu-central-1.eks.amazonaws.com') {
               withAWS(credentials: 'lado', region: 'eu-central-1'){
