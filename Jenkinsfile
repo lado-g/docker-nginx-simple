@@ -22,7 +22,7 @@ pipeline {
             git branch: "${params.BRANCH}", url: githuburl
           }
         }  
-        stage ('k8s') {
+        stage ('k8s-ls') {
           steps {
             withKubeConfig(clusterName: 'eks', contextName: '', credentialsId: 'eks', namespace: 'kube-system', serverUrl: 'https://F56D93F0BD9D9EFC60E3B17D008C1C51.gr7.eu-central-1.eks.amazonaws.com') {
               withAWS(credentials: 'lado', region: 'eu-central-1'){
@@ -31,13 +31,13 @@ pipeline {
               }
             }
         }   
-        //stage('Building image') {
-        //    steps{
-        //      script {
-        //        dockerImage = docker.build registry
-        //      }
-        //    }
-        //  }
+        stage('Building image') {
+            steps{
+              script {
+                dockerImage = docker.build registry
+              }
+            }
+          }
         //stage ('unit tests') {
 //            steps {
 //              script {
@@ -56,18 +56,27 @@ pipeline {
 //            }
 //        }
 //
-       //   stage('Push image') {
-       //        steps {
-       //            script {
-       //          withDockerRegistry([url: registryurl ,credentialsId: "ecr:eu-central-1:ecr"]) {
-       //              dockerImage.push(env.GIT_COMMIT)
-       //              dockerImage.push("latest")
-       //              dockerImage.push(env.DATE)
-       //              
-       //             }
-       //         }
-       //     }
-       // }
+        stage('Push image') {
+            steps {
+                script {
+                    withDockerRegistry([url: registryurl ,credentialsId: "ecr:eu-central-1:ecr"]) {
+                       dockerImage.push(env.GIT_COMMIT)
+                       dockerImage.push("latest")
+                       dockerImage.push(env.DATE)
+                     
+                    }
+                }
+            }
+        }
+        stage ('k8s-update') {
+          steps {
+            withKubeConfig(clusterName: 'eks', contextName: '', credentialsId: 'eks', namespace: 'kube-system', serverUrl: 'https://F56D93F0BD9D9EFC60E3B17D008C1C51.gr7.eu-central-1.eks.amazonaws.com') {
+              withAWS(credentials: 'lado', region: 'eu-central-1'){
+                    sh 'kubectl rolling-update nginx --image=558860702682.dkr.ecr.eu-central-1.amazonaws.com/hello-world:latest' 
+                }
+              }
+            }
+        }   
 
             
     }
