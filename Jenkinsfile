@@ -25,7 +25,7 @@ pipeline {
         stage ('k8s') {
           steps {
             withKubeConfig(clusterName: 'eks', contextName: '', credentialsId: 'eks', namespace: 'kube-system', serverUrl: 'https://B2EF2EDE4C3C11211A74ADFE80BA95C8.gr7.eu-central-1.eks.amazonaws.com') {
-              withAWS(credentials: 'aws-credentials', region: 'eu-central-1'){
+              withAWS(credentials: 'lado', region: 'eu-central-1'){
                     sh 'kubectl get pods' 
                 }
               }
