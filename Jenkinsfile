@@ -1,7 +1,7 @@
 pipeline {
   
   
-  agent { docker { image 'k3integrations/kubectl' } }
+  agent { docker { image 'kubectl-with-aws-cli:1.0.3' } }
 
 
   environment {
