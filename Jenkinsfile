@@ -3,7 +3,7 @@ pipeline {
   
   agent { docker { 
     image 'kubectl-with-aws-cli:1.0.3'
-    args  '-v usr/bin/docker:/usr/bin/docker -v /var/run/docker.sock:/var/run/docker.sock '
+    args  '-v /usr/bin/docker:/usr/bin/docker -v /var/run/docker.sock:/var/run/docker.sock '
     }
   }
 
