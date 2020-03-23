@@ -1,7 +1,7 @@
 pipeline {
   
   
-  agent agent { docker { image 'roffe/kubectl' } }
+  agent { docker { image 'roffe/kubectl' } }
 
 
   environment {
