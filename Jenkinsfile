@@ -28,7 +28,7 @@ pipeline {
               withAWS(credentials: 'aws-credentials', region: 'eu-central-1'){
                     sh 'kubectl get pods' 
                 }
-            
+              }
             }
         }   
         //stage('Building image') {
