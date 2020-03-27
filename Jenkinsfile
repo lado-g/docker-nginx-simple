@@ -12,7 +12,7 @@ pipeline {
     githuburl = 'https://github.com/lado-g/docker-nginx-simple.git'
   }
     
-  
+  stages {
         
         stage('Building image') {
             steps{
@@ -51,7 +51,7 @@ pipeline {
                 }
             }
         
-            
+        }    
     }
 
 }
