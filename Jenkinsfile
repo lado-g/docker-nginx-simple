@@ -10,6 +10,7 @@ pipeline {
     dockerImage = ''
     registryurl=  "https://558860702682.dkr.ecr.eu-central-1.amazonaws.com/hello-world"
     githuburl = 'https://github.com/lado-g/docker-nginx-simple.git'
+    snsArn    = 'arn:aws:sns:eu-central-1:558860702682:jenkins-email-sender'
   }
     parameters {
     gitParameter branchFilter: 'origin/(.*)', defaultValue: 'master', name: 'BRANCH', type: 'PT_BRANCH'
@@ -60,7 +61,19 @@ pipeline {
        //         }
        //     }
        // }
-
+        
+      post {
+        success {
+          script {
+            snsPublish (topicArn:snsArn, subject: "Jenkins job", message: 'Jenkins Job env.JOB_NAME finished succesfully')
+          }
+        }
+        failure {
+          script {
+            snsPublish (topicArn:snsArn, subject: "Jenkins job", message: 'Jenkins Job env.JOB_NAME finished with errors')
+          }
+        }
+      }
             
     }
 
