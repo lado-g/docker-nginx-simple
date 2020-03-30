@@ -62,7 +62,11 @@ pipeline {
        //     }
        // }
         
-      post {
+      
+            
+    }
+
+    post {
         success {
           
             snsPublish (topicArn:snsArn, subject: "Jenkins job", message: 'Jenkins Job env.JOB_NAME finished succesfully')
@@ -71,10 +75,8 @@ pipeline {
         failure {
           
             snsPublish (topicArn:snsArn, subject: "Jenkins job", message: 'Jenkins Job env.JOB_NAME finished with errors')
-         
+          
         }
       }
-            
-    }
 
 }
