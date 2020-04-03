@@ -11,8 +11,7 @@ pipeline {
     registryurl=  "https://139339523421.dkr.ecr.us-east-1.amazonaws.com/ecr-upload-test"
     githuburl = 'https://github.com/lado-g/docker-nginx-simple.git'
   }
-  def login = ecrLogin()
-  def images = ecrListImages(repositoryName: env.registry)  
+  
   stages {
         
         stage('Building image') {
@@ -42,8 +41,10 @@ pipeline {
         stage ('ECR login') {
             steps {
               script{
-                login
-                images
+                def login = ecrLogin()
+                def images = ecrListImages(repositoryName: env.registry)  
+                sh login
+                sh images
               }
               }
         }
