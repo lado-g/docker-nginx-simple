@@ -38,25 +38,14 @@ pipeline {
         //        }
         //    }
         //}
-        stage ('ECR login') {
-            steps {
-              script{
-                def login = ecrLogin()  
-                sh login
-                
-              }
-              }
-        }
+       
 
           stage('Push image') {
                steps {
                    script {
-                 //withDockerRegistry([url: registryurl ]) {
-                 //    dockerImage.push(env.GIT_COMMIT)
-                 //    dockerImage.push("latest")
-                 //    dockerImage.push(env.DATE)
-                     //docker tag dockerImage 139339523421.dkr.ecr.us-east-1.amazonaws.com/ecr-upload-test:latest
-                     //docker tag dockerImage 139339523421.dkr.ecr.us-east-1.amazonaws.com/ecr-upload-test:prod
+                     withAWS(role:'jenkins-execution-role', roleAccount:'917656499435')
+                     def login = ecrLogin()  
+                     sh login
                      sh 'docker push 139339523421.dkr.ecr.us-east-1.amazonaws.com/ecr-upload-test:latest'
                      //docker push 139339523421.dkr.ecr.us-east-1.amazonaws.com/ecr-upload-test:latest
                      //docker push 139339523421.dkr.ecr.us-east-1.amazonaws.com/ecr-upload-test:prod
