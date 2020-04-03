@@ -42,7 +42,7 @@ pipeline {
             steps {
               script{
                 def login = ecrLogin()
-                def images = ecrListImages(repositoryName: ecr-upload-test)  
+                def images = ecrListImages(repositoryName: 'ecr-upload-test')  
                 sh login
                 sh images
               }
