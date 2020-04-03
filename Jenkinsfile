@@ -38,14 +38,25 @@ pipeline {
         //        }
         //    }
         //}
+        stage ('ECR login') {
+            steps {
+                def login = ecrLogin()
+                def images = ecrListImages(repositoryName: env.registry)
+            }
+        }
 
           stage('Push image') {
                steps {
                    script {
-                 withDockerRegistry([url: registryurl ]) {
-                     dockerImage.push(env.GIT_COMMIT)
-                     dockerImage.push("latest")
-                     dockerImage.push(env.DATE)
+                 //withDockerRegistry([url: registryurl ]) {
+                 //    dockerImage.push(env.GIT_COMMIT)
+                 //    dockerImage.push("latest")
+                 //    dockerImage.push(env.DATE)
+                     docker tag dockerImage 139339523421.dkr.ecr.us-east-1.amazonaws.com/ecr-upload-test:latest
+                     docker tag dockerImage 139339523421.dkr.ecr.us-east-1.amazonaws.com/ecr-upload-test:prod
+                     docker push dockerImage 
+                     docker push 139339523421.dkr.ecr.us-east-1.amazonaws.com/ecr-upload-test:latest
+                     docker push 139339523421.dkr.ecr.us-east-1.amazonaws.com/ecr-upload-test:prod
                      
                     }
                 }
