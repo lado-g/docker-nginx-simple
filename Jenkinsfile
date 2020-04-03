@@ -41,10 +41,9 @@ pipeline {
         stage ('ECR login') {
             steps {
               script{
-                def login = ecrLogin()
-                def images = ecrListImages(repositoryName: 'ecr-upload-test')  
+                def login = ecrLogin()  
                 sh login
-                sh images
+                
               }
               }
         }
