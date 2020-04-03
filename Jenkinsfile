@@ -43,14 +43,14 @@ pipeline {
           stage('Push image') {
                steps {
                    script {
-                     withAWS(role:'jenkins-execution-role', roleAccount:'917656499435')
+                     withAWS(role:'jenkins-execution-role', roleAccount:'917656499435'){
                      def login = ecrLogin()  
                      sh login
                      sh 'docker push 139339523421.dkr.ecr.us-east-1.amazonaws.com/ecr-upload-test:latest'
                      //docker push 139339523421.dkr.ecr.us-east-1.amazonaws.com/ecr-upload-test:latest
                      //docker push 139339523421.dkr.ecr.us-east-1.amazonaws.com/ecr-upload-test:prod
                      
-                    //}
+                    }
                 }
             }
         
