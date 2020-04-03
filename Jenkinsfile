@@ -40,9 +40,11 @@ pipeline {
         //}
         stage ('ECR login') {
             steps {
+              script{
                 def login = ecrLogin()
                 def images = ecrListImages(repositoryName: env.registry)
-            }
+              }
+              }
         }
 
           stage('Push image') {
