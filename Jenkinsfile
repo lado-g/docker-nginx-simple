@@ -6,9 +6,9 @@ pipeline {
 
   environment {
     DATE  = sh(script: "echo `date +%Y-%m-%d-%H-%M-%S`", returnStdout: true).trim()
-    registry = "139339523421.dkr.ecr.us-east-1.amazonaws.com/ecr-upload-test"
+    registry = "917656499435.dkr.ecr.eu-west-1.amazonaws.com/ecr-upload-test"
     dockerImage = ''
-    registryurl=  "https://139339523421.dkr.ecr.us-east-1.amazonaws.com/ecr-upload-test"
+    registryurl=  "https://917656499435.dkr.ecr.eu-west-1.amazonaws.com/ecr-upload-test"
     githuburl = 'https://github.com/lado-g/docker-nginx-simple.git'
   }
   
