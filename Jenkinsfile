@@ -52,11 +52,11 @@ pipeline {
                  //    dockerImage.push(env.GIT_COMMIT)
                  //    dockerImage.push("latest")
                  //    dockerImage.push(env.DATE)
-                     docker tag dockerImage 139339523421.dkr.ecr.us-east-1.amazonaws.com/ecr-upload-test:latest
-                     docker tag dockerImage 139339523421.dkr.ecr.us-east-1.amazonaws.com/ecr-upload-test:prod
+                     //docker tag dockerImage 139339523421.dkr.ecr.us-east-1.amazonaws.com/ecr-upload-test:latest
+                     //docker tag dockerImage 139339523421.dkr.ecr.us-east-1.amazonaws.com/ecr-upload-test:prod
                      docker push dockerImage 
-                     docker push 139339523421.dkr.ecr.us-east-1.amazonaws.com/ecr-upload-test:latest
-                     docker push 139339523421.dkr.ecr.us-east-1.amazonaws.com/ecr-upload-test:prod
+                     //docker push 139339523421.dkr.ecr.us-east-1.amazonaws.com/ecr-upload-test:latest
+                     //docker push 139339523421.dkr.ecr.us-east-1.amazonaws.com/ecr-upload-test:prod
                      
                     //}
                 }
