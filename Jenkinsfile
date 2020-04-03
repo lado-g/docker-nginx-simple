@@ -43,13 +43,15 @@ pipeline {
           stage('Push image') {
                steps {
                    script {
-                     sh("eval \$(aws ecr get-login --no-include-email --region eu-west-1 | sed 's|https://||')")
-                     
+                     withAWS(role:'jenkins-execution-role', roleAccount:'917656499435', region: 'eu-west-1'){
+                     //sh("eval \$(aws ecr get-login --no-include-email --region eu-west-1 | sed 's|https://||')")
+                     def login = ecrLogin()
+                     sh login
                      sh 'docker push 917656499435.dkr.ecr.eu-west-1.amazonaws.com/ecr-upload-test'
                      //docker push 139339523421.dkr.ecr.us-east-1.amazonaws.com/ecr-upload-test:latest
                      //docker push 139339523421.dkr.ecr.us-east-1.amazonaws.com/ecr-upload-test:prod
                      
-                    
+                     }
                 }
             }
         
